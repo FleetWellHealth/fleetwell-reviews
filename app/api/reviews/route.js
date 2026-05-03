@@ -20,21 +20,6 @@ export async function GET() {
     // silently use fallback values
   }
 
-  // Load Bitter 500 from Google Fonts for pixel-perfect font match
-  let fontData;
-  try {
-    const css = await fetch(
-      'https://fonts.googleapis.com/css2?family=Bitter:wght@500&display=swap',
-      { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1)' } }
-    ).then(r => r.text());
-    const fontUrl = css.match(/url\(([^)]+\.woff2[^)]*)\)/)?.[1];
-    if (fontUrl) {
-      fontData = await fetch(fontUrl).then(r => r.arrayBuffer());
-    }
-  } catch (_) {
-    // fall back to Georgia (Bitter's closest serif fallback)
-  }
-
   const text = `${rating.toFixed(1)} · ${count} Google Reviews`;
 
   return new ImageResponse(
@@ -53,7 +38,7 @@ export async function GET() {
           color:      '#AD2501',
           fontWeight: 500,
           fontSize:   25,
-          fontFamily: fontData ? 'Bitter' : 'Georgia, serif',
+          fontFamily: 'Georgia, serif',
           lineHeight: 1,
         }}>
           {text}
@@ -63,7 +48,6 @@ export async function GET() {
     {
       width:  520,
       height: 35,
-      fonts: fontData ? [{ name: 'Bitter', data: fontData, weight: 500, style: 'normal' }] : [],
       headers: {
         'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
       },
