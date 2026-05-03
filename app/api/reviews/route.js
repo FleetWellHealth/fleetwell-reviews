@@ -36,11 +36,11 @@ export async function GET() {
           background:  'white',
           width:       '100%',
           height:      '100%',
-          paddingLeft: '2px',
+          paddingLeft: '0px',
         }}
       >
         <span style={{
-          color:      '#AD2501',
+          color:      '#AD1000',
           fontWeight: 500,
           fontSize:   25,
           fontFamily: 'Bitter',
