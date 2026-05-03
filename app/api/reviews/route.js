@@ -1,14 +1,14 @@
 import { ImageResponse } from 'next/og';
- 
+
 export const runtime = 'edge';
- 
+
 export async function GET() {
   const PLACE_ID = process.env.PLACE_ID;
   const API_KEY  = process.env.GOOGLE_API_KEY;
- 
+
   let count  = 57;   // fallback if API fails
   let rating = 5.0;
- 
+
   try {
     const res  = await fetch(
       `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=rating,user_ratings_total&key=${API_KEY}`
@@ -19,10 +19,9 @@ export async function GET() {
   } catch (_) {
     // silently use fallback values
   }
- 
-  const stars = '★★★★★';
-  const text  = `${rating.toFixed(1)}  ·  ${count} Google Reviews`;
- 
+
+  const text = `${rating.toFixed(1)} · ${count} Google Reviews`;
+
   return new ImageResponse(
     (
       <div
@@ -33,12 +32,8 @@ export async function GET() {
           width:       '100%',
           height:      '100%',
           paddingLeft: '1px',
-          gap:         '5px',
         }}
       >
-        <span style={{ color: '#AD2501', fontWeight: 700, fontSize: 11, letterSpacing: 1 }}>
-          {stars}
-        </span>
         <span style={{ color: '#AD2501', fontWeight: 500, fontSize: 13 }}>
           {text}
         </span>
@@ -53,4 +48,3 @@ export async function GET() {
     }
   );
 }
- 
