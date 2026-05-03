@@ -34,14 +34,14 @@ export async function GET() {
           paddingLeft: '1px',
         }}
       >
-        <span style={{ color: '#AD2501', fontWeight: 500, fontSize: 13 }}>
+        <span style={{ color: '#AD2501', fontWeight: 500, fontSize: 26 }}>
           {text}
         </span>
       </div>
     ),
     {
-      width:  260,
-      height: 20,
+      width:  520,
+      height: 40,
       headers: {
         'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
       },
