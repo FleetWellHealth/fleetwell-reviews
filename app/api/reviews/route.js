@@ -47,7 +47,7 @@ export async function GET() {
     ),
     {
       width:  520,
-      height: 35,
+      height: 30,
       headers: {
         'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
       },
