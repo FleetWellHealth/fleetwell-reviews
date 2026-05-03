@@ -20,6 +20,11 @@ export async function GET() {
     // silently use fallback values
   }
 
+  // Load Bitter Medium (500) from our own public folder — no external dependency
+  const fontData = await fetch(
+    new URL('/fonts/Bitter-Medium.ttf', 'https://fleetwell-reviews.vercel.app')
+  ).then(r => r.arrayBuffer());
+
   const text = `${rating.toFixed(1)} · ${count} Google Reviews`;
 
   return new ImageResponse(
@@ -38,7 +43,7 @@ export async function GET() {
           color:      '#AD2501',
           fontWeight: 500,
           fontSize:   25,
-          fontFamily: 'Georgia, serif',
+          fontFamily: 'Bitter',
           lineHeight: 1,
         }}>
           {text}
@@ -48,6 +53,12 @@ export async function GET() {
     {
       width:  520,
       height: 30,
+      fonts: [{
+        name:   'Bitter',
+        data:   fontData,
+        weight: 500,
+        style:  'normal',
+      }],
       headers: {
         'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
       },
