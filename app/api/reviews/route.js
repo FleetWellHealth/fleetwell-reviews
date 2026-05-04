@@ -37,7 +37,7 @@ export async function GET() {
         <span style={{
           color:      '#AD1000',
           fontWeight: 500,
-          fontSize:   25,
+          fontSize:   23,
           fontFamily: 'Georgia, serif',
           lineHeight: 1,
         }}>
