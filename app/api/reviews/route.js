@@ -6,21 +6,19 @@ export async function GET() {
   const PLACE_ID = process.env.PLACE_ID;
   const API_KEY  = process.env.GOOGLE_API_KEY;
 
-  let count  = 62;   // fallback if API fails
+  let count  = 61;
   let rating = 5.0;
 
   try {
-    console.log('[reviews] env check - PLACE_ID:', PLACE_ID ? 'set' : 'MISSING', 'API_KEY:', API_KEY ? 'set' : 'MISSING');
     const res  = await fetch(
       `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=rating,user_ratings_total&key=${API_KEY}`,
-      { cache: 'no-store' }
+      { next: { revalidate: 3600 } }
     );
     const data = await res.json();
-    console.log('[reviews] API response status:', data.status, '| error:', data.error_message ?? 'none');
     count  = data.result?.user_ratings_total ?? count;
     rating = data.result?.rating            ?? rating;
   } catch (err) {
-    console.error('[reviews] fetch failed:', err?.message || String(err));
+    // fall back to hardcoded values
   }
 
   const text = `${rating.toFixed(1)} · ${count} Google Reviews`;
