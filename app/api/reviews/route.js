@@ -11,7 +11,7 @@ export async function GET() {
 
   try {
         console.log('[reviews] env check - PLACE_ID:', PLACE_ID ? 'set' : 'MISSING', 'API_KEY:', API_KEY ? 'set' : 'MISSING');
-        const res  = await fetch
+        const res  = await fetch(
                 `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=rating,user_ratings_total&key=${API_KEY}`
               );
         const data = await res.json();
