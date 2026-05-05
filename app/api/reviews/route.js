@@ -6,13 +6,13 @@ export async function GET() {
   const PLACE_ID = process.env.PLACE_ID;
   const API_KEY  = process.env.GOOGLE_API_KEY;
 
-  let count  = 61;
+  let count  = 62;
   let rating = 5.0;
 
   try {
     const res  = await fetch(
       `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=rating,user_ratings_total&key=${API_KEY}`,
-      { next: { revalidate: 3600 } }
+      { next: { revalidate: 900 } }
     );
     const data = await res.json();
     count  = data.result?.user_ratings_total ?? count;
