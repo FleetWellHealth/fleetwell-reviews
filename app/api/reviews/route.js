@@ -12,7 +12,7 @@ export async function GET() {
   try 
     const res  = await fetch(
       `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=rating,user_ratings_total&key=${API_KEY}`,
-    { cache: 'no-store' }
+    { next: { revalidate: 900 } }  // refresh every 15 min
     );
     const data = await res.json();
     count  = data.result?.user_ratings_total ?? count;
