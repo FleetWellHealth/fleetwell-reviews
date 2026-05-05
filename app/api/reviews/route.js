@@ -9,10 +9,10 @@ export async function GET() {
   let count  = 62;
   let rating = 5.0;
 
-  try {
+  try 
     const res  = await fetch(
       `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=rating,user_ratings_total&key=${API_KEY}`,
-      { next: { revalidate: 900 } }
+    { cache: 'no-store' }
     );
     const data = await res.json();
     count  = data.result?.user_ratings_total ?? count;
