@@ -6,7 +6,7 @@ export async function GET() {
   const PLACE_ID = process.env.PLACE_ID;
   const API_KEY  = process.env.GOOGLE_API_KEY;
 
-  let count  = 62;
+  let count  = 67;
   let rating = 5.0;
 
   try {
